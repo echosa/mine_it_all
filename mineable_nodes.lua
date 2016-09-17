@@ -1,4 +1,4 @@
-mia = {
+mine_it_all = {
     enabled_nodes = {
         {
             node_name = "default:gravel",
