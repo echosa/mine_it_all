@@ -48,7 +48,6 @@ minetest.register_on_dignode(function(pos, node, digger)
     local current_tool = digger:get_wielded_item():get_name()
     if digger:get_player_control().sneak and is_node_vein_diggable(node.name, current_tool) then
         local dig_count = remove_touching_nodes(pos, node.name, digger)
-        minetest.log("Total wear: "..dig_count)
 
         local def = ItemStack({name=node.name}):get_definition()
         local wielded = digger:get_wielded_item()
