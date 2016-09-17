@@ -6,14 +6,12 @@ TODO:
 
 dofile(minetest.get_modpath("mine_it_all").."/mineable_nodes.lua")
 
-local function is_node_vein_diggable(node, digger)
-    if digger:get_player_control().sneak then
-        for _,mineable_node in pairs(mia_enabled_nodes) do
-            if node == mineable_node.node_name then
-                for _,tool in pairs(mineable_node.tools) do
-                    if digger:get_wielded_item():get_name() == tool then
-                        return true
-                    end
+local function is_node_vein_diggable(node, tool)
+    for _,mineable_node in pairs(mia_enabled_nodes) do
+        if node == mineable_node.node_name then
+            for _,useable_tool in pairs(mineable_node.tools) do
+                if useable_tool == tool then
+                    return true
                 end
             end
         end
@@ -45,7 +43,8 @@ local function remove_touching_nodes(pos, node, digger)
 end
 
 minetest.register_on_dignode(function(pos, node, digger)
-    if is_node_vein_diggable(node.name, digger) then
+    local current_tool = digger:get_wielded_item():get_name()
+    if digger:get_player_control().sneak and is_node_vein_diggable(node.name, current_tool) then
         local dig_count = remove_touching_nodes(pos, node.name, digger)
         minetest.log("Total wear: "..dig_count)
 
@@ -56,11 +55,9 @@ minetest.register_on_dignode(function(pos, node, digger)
     	local dp = core.get_dig_params(def.groups, tp)
     	if wdef and wdef.after_use then
     		wielded = wdef.after_use(wielded, digger, node, dp) or wielded
-    	else
-    		-- Wear out tool
-    		if not core.setting_getbool("creative_mode") then
-    			wielded:add_wear(dp.wear * dig_count)
-    		end
+    	elseif not core.setting_getbool("creative_mode") then
+            -- Wear out tool
+            wielded:add_wear(dp.wear * dig_count)
     	end
     	digger:set_wielded_item(wielded)
 
