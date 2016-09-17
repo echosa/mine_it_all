@@ -52,14 +52,14 @@ minetest.register_on_dignode(function(pos, node, digger)
         local wielded = digger:get_wielded_item()
         local wdef = wielded:get_definition()
         local tp = wielded:get_tool_capabilities()
-    	local dp = core.get_dig_params(def.groups, tp)
-    	if wdef and wdef.after_use then
-    		wielded = wdef.after_use(wielded, digger, node, dp) or wielded
-    	elseif not core.setting_getbool("creative_mode") then
+        local dp = core.get_dig_params(def.groups, tp)
+        if wdef and wdef.after_use then
+            wielded = wdef.after_use(wielded, digger, node, dp) or wielded
+        elseif not core.setting_getbool("creative_mode") then
             -- Wear out tool
             wielded:add_wear(dp.wear * dig_count)
-    	end
-    	digger:set_wielded_item(wielded)
+        end
+        digger:set_wielded_item(wielded)
 
     end
 end)
