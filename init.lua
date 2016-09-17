@@ -1,11 +1,3 @@
---[[
-TODO:
-- Add registration function for mods to register block/tool combos
-- Allow adding of groups like group:wood instead of just blocks
-- Do not let tools mine more than their current wear amount allows
-- Add hunger penalty (dependency on hunger mod)
-]]
-
 dofile(minetest.get_modpath("mine_it_all").."/mineable_nodes.lua")
 
 local function is_node_vein_diggable(node, tool)
