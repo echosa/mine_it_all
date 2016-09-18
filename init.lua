@@ -1,14 +1,9 @@
 dofile(minetest.get_modpath("mine_it_all").."/mineable_nodes.lua")
 
 local function is_node_vein_diggable(node, tool)
-    for _,mineable_node in pairs(mine_it_all.enabled_nodes) do
-        if node == mineable_node.node_name then
-            for _,useable_tool in pairs(mineable_node.tools) do
-                if useable_tool == tool then
-                    return true
-                end
-            end
-        end
+    local node_vein = mine_it_all.enabled_nodes[node]
+    if node_vein ~= nil then
+        return node_vein.tools[tool] ~= nil and node_vein.tools[tool] or false
     end
     return false
 end
