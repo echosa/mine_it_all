@@ -32,15 +32,14 @@ You'll immediately get all drops and your tool will be worn down as if you'd man
 You can change which blocks are vein mineable using which tools by editing the `mineable_nodes.lua` file. It should be pretty self-explanatory, but the general idea is that file contains a bunch of code blocks that follow this pattern:
 
 ```
-{
-    node_name = "default:gravel",
+["default:gravel"] = {
     tools = {
-        "default:shovel_wood",
-        "default:shovel_stone",
-        "default:shovel_steel",
-        "default:shovel_bronze",
-        "default:shovel_mese",
-        "default:shovel_diamond",
+        ["default:shovel_wood"] = true,
+        ["default:shovel_stone"] = true,
+        ["default:shovel_steel"] = true,
+        ["default:shovel_bronze"] = true,
+        ["default:shovel_mese"] = true,
+        ["default:shovel_diamond"] = true,
     },
 },
 ```
@@ -60,4 +59,3 @@ Ideally, I'd like to add in additional penalty for mining full veins. I might en
 ### License
 
 This is mod is released under the MIT License. See `LICENSE.txt`.
-
