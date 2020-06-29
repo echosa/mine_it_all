@@ -2,6 +2,10 @@
 
 This is a [Minetest](http://www.minetest.net) mod that recreates the functionality of the Minecraft mod Veinminer. It lets you mine full veins of connected blocks in one go.
 
+### Project Status
+
+This project is currently abandoned. I don't play Minetest anymore, and I don't have time to work on this. If you'd like to fork this and continue working on it, let me know and I'll add a link to your fork here.
+
 ### Installation
 
 Download this mod, and install it into the appropriate `mods` directory for your installation of Minetest. The directory should be named `mine_it_all`, like this:
